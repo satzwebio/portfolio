@@ -12,9 +12,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+import os
+
 #dfd
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jobs.apps.JobsConfig'
 ]
 
 MIDDLEWARE = [
@@ -76,8 +80,13 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
+        'NAME': 'portfoliodb',
+        'USER':'postgres',
+        'PASSWORD':'Postgres1!',
+        'HOST':'localhost',
+        'PORT':5432
     }
 }
 
@@ -119,3 +128,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEIDA_ROOT = os.path.join(BASE_DIR,'media') #This will create a directory called media
+MEDIA_URL = '/media/'   #This is for url
